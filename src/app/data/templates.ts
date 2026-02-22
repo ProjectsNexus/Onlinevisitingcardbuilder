@@ -1,0 +1,148 @@
+import { CardTemplate } from '../types/card';
+
+export const cardTemplates: CardTemplate[] = [
+  {
+    id: 'modern-minimal',
+    name: 'Modern Minimal',
+    category: 'Professional',
+    preview: 'minimal',
+    colors: {
+      primary: '#000000',
+      secondary: '#ffffff',
+      text: '#333333',
+      background: '#ffffff',
+    },
+  },
+  {
+    id: 'vibrant-gradient',
+    name: 'Vibrant Gradient',
+    category: 'Creative',
+    preview: 'gradient',
+    colors: {
+      primary: '#6366f1',
+      secondary: '#ec4899',
+      text: '#ffffff',
+      background: 'linear-gradient(135deg, #6366f1 0%, #ec4899 100%)',
+    },
+  },
+  {
+    id: 'corporate-blue',
+    name: 'Corporate Blue',
+    category: 'Professional',
+    preview: 'corporate',
+    colors: {
+      primary: '#1e40af',
+      secondary: '#3b82f6',
+      text: '#ffffff',
+      background: '#1e40af',
+    },
+  },
+  {
+    id: 'elegant-gold',
+    name: 'Elegant Gold',
+    category: 'Luxury',
+    preview: 'luxury',
+    colors: {
+      primary: '#d97706',
+      secondary: '#fbbf24',
+      text: '#1f2937',
+      background: '#fffbeb',
+    },
+  },
+  {
+    id: 'nature-green',
+    name: 'Nature Green',
+    category: 'Eco',
+    preview: 'nature',
+    colors: {
+      primary: '#059669',
+      secondary: '#10b981',
+      text: '#ffffff',
+      background: '#064e3b',
+    },
+  },
+  {
+    id: 'sunset-orange',
+    name: 'Sunset Orange',
+    category: 'Creative',
+    preview: 'sunset',
+    colors: {
+      primary: '#ea580c',
+      secondary: '#fb923c',
+      text: '#ffffff',
+      background: '#7c2d12',
+    },
+  },
+  {
+    id: 'ocean-teal',
+    name: 'Ocean Teal',
+    category: 'Professional',
+    preview: 'ocean',
+    colors: {
+      primary: '#0891b2',
+      secondary: '#06b6d4',
+      text: '#ffffff',
+      background: '#164e63',
+    },
+  },
+  {
+    id: 'royal-purple',
+    name: 'Royal Purple',
+    category: 'Luxury',
+    preview: 'royal',
+    colors: {
+      primary: '#7c3aed',
+      secondary: '#a78bfa',
+      text: '#ffffff',
+      background: '#5b21b6',
+    },
+  },
+  {
+    id: 'rose-pink',
+    name: 'Rose Pink',
+    category: 'Creative',
+    preview: 'rose',
+    colors: {
+      primary: '#e11d48',
+      secondary: '#fb7185',
+      text: '#ffffff',
+      background: '#9f1239',
+    },
+  },
+  {
+    id: 'slate-dark',
+    name: 'Slate Dark',
+    category: 'Professional',
+    preview: 'dark',
+    colors: {
+      primary: '#1e293b',
+      secondary: '#475569',
+      text: '#f1f5f9',
+      background: '#0f172a',
+    },
+  },
+  {
+    id: 'mint-fresh',
+    name: 'Mint Fresh',
+    category: 'Creative',
+    preview: 'mint',
+    colors: {
+      primary: '#14b8a6',
+      secondary: '#5eead4',
+      text: '#134e4a',
+      background: '#f0fdfa',
+    },
+  },
+  {
+    id: 'crimson-bold',
+    name: 'Crimson Bold',
+    category: 'Creative',
+    preview: 'crimson',
+    colors: {
+      primary: '#dc2626',
+      secondary: '#ef4444',
+      text: '#ffffff',
+      background: '#7f1d1d',
+    },
+  },
+];
