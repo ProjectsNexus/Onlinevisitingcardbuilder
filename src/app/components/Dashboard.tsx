@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { VisitingCard } from '../types/card';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { Plus, Eye, Share2, Download, Trash2, Edit, BarChart3 } from 'lucide-react';
+import { Plus, Eye, Share2, Download, Trash2, Edit, BarChart3, LogOut } from 'lucide-react';
 import { CardPreview } from './CardPreview';
 import {
   AlertDialog,
@@ -14,6 +14,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from './ui/alert-dialog';
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 interface DashboardProps {
   cards: VisitingCard[];
@@ -25,13 +28,37 @@ interface DashboardProps {
 
 export function Dashboard({ cards, onCreateNew, onEdit, onDelete, onView }: DashboardProps) {
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
 
   const totalViews = cards.reduce((sum, card) => sum + card.views, 0);
   const totalShares = cards.reduce((sum, card) => sum + card.shares, 0);
   const totalDownloads = cards.reduce((sum, card) => sum + card.downloads, 0);
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success('Logged out successfully');
+      navigate('/login');
+    } catch (error) {
+      toast.error('Failed to logout');
+    }
+  };
+
   return (
     <div className="space-y-6">
+      {/* User Info */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2>Welcome back!</h2>
+          <p className="text-sm text-gray-600 mt-1">{user?.email}</p>
+        </div>
+        <Button variant="outline" onClick={handleLogout} className="gap-2">
+          <LogOut size={16} />
+          Logout
+        </Button>
+      </div>
+
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
@@ -112,7 +139,7 @@ export function Dashboard({ cards, onCreateNew, onEdit, onDelete, onView }: Dash
             <Card key={card.id} className="overflow-hidden">
               <div className="p-4">
                 <div className="mb-4">
-                  <CardPreview card={card} />
+                  <CardPreview card={card} editMode={false} />
                 </div>
 
                 {/* Stats */}
@@ -139,25 +166,25 @@ export function Dashboard({ cards, onCreateNew, onEdit, onDelete, onView }: Dash
 
                 {/* Actions */}
                 <div className="flex gap-2">
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
+                  <Button
+                    variant="outline"
+                    size="sm"
                     className="flex-1 gap-2"
                     onClick={() => onView(card)}
                   >
                     <Eye size={14} />
                     View
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
+                  <Button
+                    variant="outline"
+                    size="sm"
                     onClick={() => onEdit(card)}
                   >
                     <Edit size={14} />
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
+                  <Button
+                    variant="outline"
+                    size="sm"
                     onClick={() => setDeleteId(card.id)}
                   >
                     <Trash2 size={14} />

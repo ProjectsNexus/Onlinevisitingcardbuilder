@@ -11,9 +11,10 @@ interface CardFormProps {
   onSave: (card: Partial<VisitingCard>) => void;
   onCancel: () => void;
   onPreviewUpdate?: (card: Partial<VisitingCard>) => void;
+  isSaving?: boolean;
 }
 
-export function CardForm({ initialCard, onSave, onCancel, onPreviewUpdate }: CardFormProps) {
+export function CardForm({ initialCard, onSave, onCancel, onPreviewUpdate, isSaving }: CardFormProps) {
   const [formData, setFormData] = useState({
     name: initialCard?.name || '',
     title: initialCard?.title || '',
@@ -254,8 +255,8 @@ export function CardForm({ initialCard, onSave, onCancel, onPreviewUpdate }: Car
         <Button type="button" variant="outline" onClick={onCancel}>
           Cancel
         </Button>
-        <Button type="submit">
-          Save Card
+        <Button type="submit" disabled={isSaving}>
+          {isSaving ? 'Saving...' : 'Save Card'}
         </Button>
       </div>
     </form>
