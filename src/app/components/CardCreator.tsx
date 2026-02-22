@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { VisitingCard, CardTemplate } from '../types/card';
+import { VisitingCard, CardTemplate, ElementPosition } from '../types/card';
 import { cardTemplates } from '../data/templates';
 import { TemplateSelector } from './TemplateSelector';
 import { CardForm } from './CardForm';
-import { CardPreview } from './CardPreview';
+import { CardPreviewDraggable } from './CardPreviewDraggable';
+import { QRCodeModal } from './QRCodeModal';
 import { Button } from './ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Share2 } from 'lucide-react';
 import { Card } from './ui/card';
 
 interface CardCreatorProps {
@@ -21,6 +22,9 @@ export function CardCreator({ initialCard, onSave, onCancel }: CardCreatorProps)
       ? cardTemplates.find(t => t.id === initialCard.templateId) || cardTemplates[0]
       : cardTemplates[0]
   );
+  
+  const [isEditingLayout, setIsEditingLayout] = useState(false);
+  const [showQRModal, setShowQRModal] = useState(false);
   
   const [previewCard, setPreviewCard] = useState<Partial<VisitingCard>>(
     initialCard || {
@@ -66,6 +70,19 @@ export function CardCreator({ initialCard, onSave, onCancel }: CardCreatorProps)
 
   const handleFormChange = (cardData: Partial<VisitingCard>) => {
     setPreviewCard(prev => ({ ...prev, ...cardData }));
+  };
+
+  const handleUpdateStyles = (elementName: string, fontSize: number, position: ElementPosition) => {
+    setPreviewCard(prev => ({
+      ...prev,
+      elementStyles: {
+        ...prev.elementStyles,
+        [elementName]: {
+          fontSize,
+          position,
+        },
+      },
+    }));
   };
 
   return (
@@ -122,10 +139,31 @@ export function CardCreator({ initialCard, onSave, onCancel }: CardCreatorProps)
           {/* Live Preview */}
           <div className="lg:sticky lg:top-6 h-fit">
             <Card className="p-6">
-              <h3 className="mb-4">Live Preview</h3>
-              <CardPreview
+              <div className="flex items-center justify-between mb-4">
+                <h3>Live Preview</h3>
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    variant={isEditingLayout ? "default" : "outline"}
+                    onClick={() => setIsEditingLayout(!isEditingLayout)}
+                  >
+                    {isEditingLayout ? 'Done Editing' : 'Edit Layout'}
+                  </Button>
+                  {initialCard && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setShowQRModal(true)}
+                    >
+                      <Share2 size={14} className="mr-1" />
+                      Share
+                    </Button>
+                  )}
+                </div>
+              </div>
+              <CardPreviewDraggable
                 card={{
-                  id: '',
+                  id: initialCard?.id || `card-${Date.now()}`,
                   name: previewCard.name || 'Your Name',
                   title: previewCard.title || 'Your Title',
                   company: previewCard.company || 'Company Name',
@@ -137,15 +175,28 @@ export function CardCreator({ initialCard, onSave, onCancel }: CardCreatorProps)
                   twitter: previewCard.twitter,
                   templateId: selectedTemplate.id,
                   customColors: previewCard.customColors,
-                  createdAt: '',
-                  views: 0,
-                  shares: 0,
-                  downloads: 0,
+                  createdAt: initialCard?.createdAt || '',
+                  views: initialCard?.views || 0,
+                  shares: initialCard?.shares || 0,
+                  downloads: initialCard?.downloads || 0,
+                  elementStyles: previewCard.elementStyles,
                 }}
+                isEditing={isEditingLayout}
+                onUpdateStyles={handleUpdateStyles}
                 template={selectedTemplate}
               />
             </Card>
           </div>
+
+          {/* QR Code Modal */}
+          {initialCard && (
+            <QRCodeModal
+              cardId={initialCard.id}
+              cardName={initialCard.name}
+              isOpen={showQRModal}
+              onClose={() => setShowQRModal(false)}
+            />
+          )}
         </div>
       )}
     </div>

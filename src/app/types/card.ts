@@ -1,3 +1,13 @@
+export interface ElementPosition {
+  x: number;
+  y: number;
+}
+
+export interface ElementStyles {
+  fontSize?: number;
+  position?: ElementPosition;
+}
+
 export interface VisitingCard {
   id: string;
   name: string;
@@ -21,6 +31,17 @@ export interface VisitingCard {
   views: number;
   shares: number;
   downloads: number;
+  elementStyles?: {
+    name?: ElementStyles;
+    title?: ElementStyles;
+    company?: ElementStyles;
+    email?: ElementStyles;
+    phone?: ElementStyles;
+    website?: ElementStyles;
+    address?: ElementStyles;
+  };
+  userId?: string;
+  updatedAt?: string;
 }
 
 export interface CardTemplate {
