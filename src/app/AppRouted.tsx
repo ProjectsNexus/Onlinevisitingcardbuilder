@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
-import { VisitingCard } from './types/card';
+import { VisitingCard, CardLayout } from './types/card';
 import { getUserCards, saveCardToFirestore, deleteCardFromFirestore } from './utils/firebaseStorage';
 import { Dashboard } from './components/Dashboard';
-import { CardCreator } from './components/CardCreator';
-import { CardViewer } from './components/CardViewer';
+import { CardEditor } from './components/CardEditor';
 import { PublicCardViewer } from './components/PublicCardViewer';
 import { LoginPage } from './pages/LoginPage';
 import { SignUpPage } from './pages/SignUpPage';
@@ -44,7 +43,21 @@ function AuthenticatedApp() {
   }, [user]);
 
   const handleCreateNew = () => {
-    setSelectedCard(null);
+    // Create a new empty card with block-based structure
+    const newCard: VisitingCard = {
+      id: `card-${Date.now()}`,
+      layout: {
+        width: 800,
+        height: 500,
+        backgroundColor: '#ffffff',
+      },
+      blocks: [],
+      createdAt: new Date().toISOString(),
+      views: 0,
+      shares: 0,
+      downloads: 0,
+    };
+    setSelectedCard(newCard);
     setCurrentView('create');
   };
 
@@ -164,19 +177,12 @@ function AuthenticatedApp() {
           />
         )}
 
-        {(currentView === 'create' || currentView === 'edit') && (
-          <CardCreator
-            initialCard={selectedCard || undefined}
+        {(currentView === 'create' || currentView === 'edit') && selectedCard && (
+          <CardEditor
+            card={selectedCard}
             onSave={handleSaveCard}
             onCancel={handleCancel}
-          />
-        )}
-
-        {currentView === 'view' && selectedCard && (
-          <CardViewer
-            card={selectedCard}
-            onBack={handleCancel}
-            onViewIncrement={() => {}}
+            isLoading={loading}
           />
         )}
       </main>
@@ -206,7 +212,7 @@ export default function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/card/:cardId" element={<PublicCardViewer />} />
+      <Route path="/card/:cardSlug" element={<PublicCardViewer />} />
       <Route 
         path="/dashboard" 
         element={user ? <AuthenticatedApp /> : <Navigate to="/login" />} 

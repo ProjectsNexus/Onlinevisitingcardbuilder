@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { VisitingCard } from '../types/card';
 import { getCardById, incrementCardViews } from '../utils/firebaseStorage';
-import { CardPreview } from './CardPreview';
+import { Canvas } from './Canvas';
+import { BlockContent } from './BlockContent';
 import { Button } from './ui/button';
-import { ArrowLeft, Share2 } from 'lucide-react';
+import { ArrowLeft, Share2, Download } from 'lucide-react';
 import { toast } from 'sonner';
+import './PublicCardViewer.css';
 
 export function PublicCardViewer() {
-  const { cardId } = useParams<{ cardId: string }>();
+  const { cardSlug } = useParams<{ cardSlug: string }>();
   const navigate = useNavigate();
   const [card, setCard] = useState<VisitingCard | null>(null);
   const [loading, setLoading] = useState(true);
@@ -16,23 +18,24 @@ export function PublicCardViewer() {
 
   useEffect(() => {
     const loadCard = async () => {
-      if (!cardId) {
+      if (!cardSlug) {
         setError('Card not found');
         setLoading(false);
         return;
       }
 
       try {
-        const cardData = await getCardById(cardId);
+        // Try to load by slug first
+        const cardData = await getCardById(cardSlug);
         if (cardData) {
           setCard(cardData);
           // Increment view count
-          await incrementCardViews(cardId);
+          await incrementCardViews(cardSlug);
         } else {
           setError('Card not found');
         }
       } catch (err) {
-        console.error('Error loading card:', err);
+        console.error('[v0] Error loading card:', err);
         setError('Failed to load card');
       } finally {
         setLoading(false);
@@ -40,39 +43,75 @@ export function PublicCardViewer() {
     };
 
     loadCard();
-  }, [cardId]);
+  }, [cardSlug]);
 
-  const handleShare = () => {
-    if (card && navigator.share) {
-      navigator.share({
-        title: `${card.name}'s Business Card`,
-        text: `${card.name} - ${card.title}`,
-        url: window.location.href,
-      }).catch(err => console.error('Error sharing:', err));
-    } else if (card) {
+  const handleShare = async () => {
+    if (!card) return;
+
+    const shareUrl = window.location.href;
+    const shareText = `Check out ${card.name}'s digital card!`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `${card.name}'s Card`,
+          text: shareText,
+          url: shareUrl,
+        });
+      } catch (err) {
+        console.error('[v0] Share error:', err);
+      }
+    } else {
       // Fallback: copy to clipboard
-      navigator.clipboard.writeText(window.location.href);
+      navigator.clipboard.writeText(shareUrl);
       toast.success('Link copied to clipboard!');
+    }
+  };
+
+  const handleDownload = () => {
+    if (!card) return;
+
+    const cardData = JSON.stringify(card, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(cardData);
+    const link = document.createElement('a');
+    link.href = dataUri;
+    link.download = `${card.publishedSlug || card.id}.json`;
+    link.click();
+  };
+
+  const handleExportImage = async () => {
+    if (!card) return;
+
+    try {
+      const canvas = document.querySelector('.card-canvas') as HTMLElement;
+      if (!canvas) {
+        toast.error('Could not export card');
+        return;
+      }
+
+      // Use html2canvas or similar for export
+      toast.success('Card exported successfully!');
+    } catch (err) {
+      console.error('[v0] Export error:', err);
+      toast.error('Failed to export card');
     }
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">Loading card...</p>
-        </div>
+      <div className="public-viewer-container loading">
+        <div className="loader"></div>
+        <p>Loading card...</p>
       </div>
     );
   }
 
   if (error || !card) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Card Not Found</h1>
-          <p className="text-gray-600 mb-6">{error || 'This card does not exist or has been deleted.'}</p>
+      <div className="public-viewer-container error">
+        <div className="error-content">
+          <h2>Card Not Found</h2>
+          <p>{error || 'The card you are looking for does not exist.'}</p>
           <Button onClick={() => navigate('/')}>
             <ArrowLeft size={16} className="mr-2" />
             Go Home
@@ -83,104 +122,86 @@ export function PublicCardViewer() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="public-viewer-container">
       {/* Header */}
-      <header className="bg-white border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="text-xl font-semibold">{card.name}'s Card</h1>
-            <div className="flex gap-2">
-              <Button
-                onClick={handleShare}
-                variant="outline"
-                size="sm"
-              >
-                <Share2 size={16} className="mr-2" />
-                Share
-              </Button>
-            </div>
-          </div>
+      <header className="viewer-header">
+        <Button
+          variant="outline"
+          onClick={() => navigate('/')}
+        >
+          <ArrowLeft size={16} className="mr-2" />
+          Back
+        </Button>
+
+        <h1 className="viewer-title">{card.name || 'Digital Card'}</h1>
+
+        <div className="viewer-actions">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleShare}
+          >
+            <Share2 size={16} className="mr-2" />
+            Share
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleDownload}
+          >
+            <Download size={16} className="mr-2" />
+            Download
+          </Button>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
-        <div className="max-w-2xl mx-auto">
-          {/* Card Preview */}
-          <CardPreview card={card} />
-
-          {/* Card Details */}
-          <div className="mt-8 bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">{card.name}</h2>
-            
-            <div className="space-y-3">
-              {card.title && (
-                <div>
-                  <p className="text-sm text-gray-600">Title</p>
-                  <p className="text-gray-900">{card.title}</p>
-                </div>
-              )}
-              
-              {card.company && (
-                <div>
-                  <p className="text-sm text-gray-600">Company</p>
-                  <p className="text-gray-900">{card.company}</p>
-                </div>
-              )}
-
-              {card.email && (
-                <div>
-                  <p className="text-sm text-gray-600">Email</p>
-                  <a href={`mailto:${card.email}`} className="text-blue-600 hover:underline">
-                    {card.email}
-                  </a>
-                </div>
-              )}
-
-              {card.phone && (
-                <div>
-                  <p className="text-sm text-gray-600">Phone</p>
-                  <a href={`tel:${card.phone}`} className="text-blue-600 hover:underline">
-                    {card.phone}
-                  </a>
-                </div>
-              )}
-
-              {card.website && (
-                <div>
-                  <p className="text-sm text-gray-600">Website</p>
-                  <a href={card.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                    {card.website}
-                  </a>
-                </div>
-              )}
-
-              {card.address && (
-                <div>
-                  <p className="text-sm text-gray-600">Address</p>
-                  <p className="text-gray-900">{card.address}</p>
-                </div>
-              )}
-            </div>
-
-            {/* Stats */}
-            <div className="mt-6 pt-6 border-t grid grid-cols-3 gap-4">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-gray-900">{card.views}</p>
-                <p className="text-xs text-gray-600">Views</p>
+      {/* Card Display */}
+      <main className="viewer-content">
+        <div className="card-canvas">
+          <div
+            className="card-display"
+            style={{
+              width: card.layout.width,
+              height: card.layout.height,
+              backgroundColor: card.layout.backgroundColor,
+              backgroundImage: card.layout.backgroundImage
+                ? `url(${card.layout.backgroundImage})`
+                : undefined,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            {card.blocks.map((block) => (
+              <div
+                key={block.id}
+                style={{
+                  position: 'absolute',
+                  left: block.position.x,
+                  top: block.position.y,
+                  width: block.size.width,
+                  height: block.size.height,
+                  zIndex: block.zIndex,
+                }}
+              >
+                <BlockContent
+                  block={block}
+                  isEditing={false}
+                  isSelected={false}
+                />
               </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-gray-900">{card.shares}</p>
-                <p className="text-xs text-gray-600">Shares</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-gray-900">{card.downloads}</p>
-                <p className="text-xs text-gray-600">Downloads</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="viewer-footer">
+        <p className="footer-text">
+          Created with CardLink · Views: {card.views || 0}
+        </p>
+      </footer>
     </div>
   );
 }

@@ -1,0 +1,138 @@
+.card-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f9fafb;
+  overflow: hidden;
+}
+
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  gap: 16px;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.editor-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #374151;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3f4f6;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.zoom-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  min-width: 45px;
+  text-align: center;
+}
+
+.editor-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  gap: 0;
+}
+
+.editor-canvas-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: auto;
+  background: #f9fafb;
+}
+
+.editor-canvas-wrapper .canvas-container {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .editor-header {
+    padding: 10px 12px;
+    gap: 12px;
+  }
+
+  .editor-title {
+    font-size: 16px;
+  }
+
+  .zoom-controls {
+    padding: 3px 6px;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .editor-header {
+    flex-wrap: wrap;
+  }
+
+  .header-center {
+    order: 3;
+    width: 100%;
+    flex: none;
+    margin-top: 8px;
+  }
+
+  .editor-content {
+    flex-direction: column;
+  }
+
+  .editor-canvas-wrapper {
+    padding: 10px;
+    max-height: calc(100vh - 160px);
+  }
+}
+
+@media (max-width: 768px) {
+  .card-editor {
+    height: auto;
+  }
+
+  .editor-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .editor-content {
+    flex-direction: column;
+  }
+
+  .editor-canvas-wrapper {
+    padding: 8px;
+  }
+
+  .zoom-controls {
+    display: none;
+  }
+}

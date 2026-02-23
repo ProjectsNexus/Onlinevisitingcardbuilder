@@ -1,0 +1,80 @@
+.canvas-container {
+  border: 2px solid #e5e7eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+}
+
+.canvas-container.editing {
+  border: 2px dashed #3b82f6;
+}
+
+.draggable-block {
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.draggable-block.selected {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+.draggable-block-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.block-resize-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #3b82f6;
+  border: 2px solid white;
+  cursor: nwse-resize;
+  display: none;
+  bottom: -5px;
+  right: -5px;
+  border-radius: 50%;
+}
+
+.draggable-block.selected .block-resize-handle {
+  display: block;
+}
+
+.block-toolbar {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 4px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 4px;
+  z-index: 1000;
+}
+
+.block-toolbar button {
+  padding: 4px 8px;
+  font-size: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.block-toolbar button:hover {
+  background: #f3f4f6;
+  border-color: #3b82f6;
+}
+
+.canvas-grid {
+  background-image:
+    linear-gradient(0deg, #f3f4f6 1px, transparent 1px),
+    linear-gradient(90deg, #f3f4f6 1px, transparent 1px);
+  background-size: 20px 20px;
+}
