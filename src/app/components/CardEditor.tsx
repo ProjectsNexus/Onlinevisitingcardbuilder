@@ -3,10 +3,13 @@ import { VisitingCard, CardBlock, BlockType, BlockPosition, BlockStyle, CardLayo
 import { Canvas } from './Canvas';
 import { ToolsPanel } from './ToolsPanel';
 import { StylePanel } from './StylePanel';
+import { ExportModal } from './ExportModal';
 import { HistoryManager } from '../utils/historyManager';
 import { createBlock, updateBlockPosition, updateBlockSize, updateBlockStyle, duplicateBlock, bringToFront, sortBlocksByZIndex } from '../utils/blockUtils';
+import { saveCardToFirestore } from '../utils/firebaseStorage';
 import { Button } from './ui/button';
-import { Menu, X, Save } from 'lucide-react';
+import { Menu, X, Save, Share2 } from 'lucide-react';
+import { toast } from 'sonner';
 import './CardEditor.css';
 
 interface CardEditorProps {
@@ -27,6 +30,8 @@ export function CardEditor({
   const [zoom, setZoom] = useState(100);
   const [showToolsPanel, setShowToolsPanel] = useState(true);
   const [showStylePanel, setShowStylePanel] = useState(true);
+  const [showExportModal, setShowExportModal] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
   const [historyManager] = useState(() => new HistoryManager(initialCard));
 
   // Auto-save to history on card change
@@ -159,6 +164,29 @@ export function CardEditor({
     onSave(card);
   }, [card, onSave]);
 
+  const handlePublishCard = useCallback(async (slug: string) => {
+    try {
+      setIsPublishing(true);
+      const updatedCard: VisitingCard = {
+        ...card,
+        publishedSlug: slug,
+        publishedUrl: `${window.location.origin}/card/${slug}`,
+        publishedAt: new Date().toISOString(),
+        isPublished: true,
+      };
+
+      await saveCardToFirestore(updatedCard);
+      setCard(updatedCard);
+      toast.success('Card published successfully!');
+      setShowExportModal(false);
+    } catch (error) {
+      console.error('Failed to publish card:', error);
+      toast.error('Failed to publish card. Please try again.');
+    } finally {
+      setIsPublishing(false);
+    }
+  }, [card]);
+
   return (
     <div className="card-editor">
       {/* Header */}
@@ -195,6 +223,14 @@ export function CardEditor({
         </div>
 
         <div className="header-right">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowExportModal(true)}
+          >
+            <Share2 size={16} className="mr-2" />
+            Export
+          </Button>
           <Button
             variant="outline"
             size="sm"
@@ -253,6 +289,15 @@ export function CardEditor({
           />
         )}
       </div>
+
+      {/* Export Modal */}
+      <ExportModal
+        card={card}
+        isOpen={showExportModal}
+        onClose={() => setShowExportModal(false)}
+        onPublish={handlePublishCard}
+        isLoading={isPublishing}
+      />
     </div>
   );
 }

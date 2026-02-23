@@ -1,0 +1,148 @@
+{
+  "id": "template-modern-minimal",
+  "layout": {
+    "width": 800,
+    "height": 500,
+    "backgroundColor": "#ffffff",
+    "backgroundImage": null
+  },
+  "blocks": [
+    {
+      "id": "block-1",
+      "type": "heading",
+      "position": { "x": 40, "y": 40 },
+      "size": { "width": 720, "height": 60 },
+      "style": {
+        "fontSize": 48,
+        "fontWeight": "bold",
+        "fontFamily": "Arial",
+        "color": "#000000",
+        "textAlign": "left",
+        "lineHeight": 1.2
+      },
+      "content": "Your Name",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-2",
+      "type": "text",
+      "position": { "x": 40, "y": 110 },
+      "size": { "width": 720, "height": 40 },
+      "style": {
+        "fontSize": 24,
+        "fontWeight": "600",
+        "fontFamily": "Arial",
+        "color": "#3b82f6",
+        "textAlign": "left"
+      },
+      "content": "Job Title / Position",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-3",
+      "type": "text",
+      "position": { "x": 40, "y": 160 },
+      "size": { "width": 720, "height": 30 },
+      "style": {
+        "fontSize": 14,
+        "fontFamily": "Arial",
+        "color": "#6b7280",
+        "textAlign": "left",
+        "lineHeight": 1.5
+      },
+      "content": "Company Name",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-4",
+      "type": "text",
+      "position": { "x": 40, "y": 220 },
+      "size": { "width": 350, "height": 25 },
+      "style": {
+        "fontSize": 13,
+        "fontFamily": "Arial",
+        "color": "#374151",
+        "textAlign": "left"
+      },
+      "content": "📧 email@example.com",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-5",
+      "type": "text",
+      "position": { "x": 400, "y": 220 },
+      "size": { "width": 360, "height": 25 },
+      "style": {
+        "fontSize": 13,
+        "fontFamily": "Arial",
+        "color": "#374151",
+        "textAlign": "left"
+      },
+      "content": "📱 +1 (555) 123-4567",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-6",
+      "type": "text",
+      "position": { "x": 40, "y": 255 },
+      "size": { "width": 720, "height": 25 },
+      "style": {
+        "fontSize": 13,
+        "fontFamily": "Arial",
+        "color": "#374151",
+        "textAlign": "left"
+      },
+      "content": "🔗 www.yourwebsite.com",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-7",
+      "type": "shape",
+      "position": { "x": 40, "y": 300 },
+      "size": { "width": 720, "height": 1 },
+      "style": {
+        "backgroundColor": "#e5e7eb",
+        "borderRadius": 0
+      },
+      "content": "",
+      "metadata": { "shapeType": "line" },
+      "zIndex": 1
+    },
+    {
+      "id": "block-8",
+      "type": "text",
+      "position": { "x": 40, "y": 320 },
+      "size": { "width": 720, "height": 60 },
+      "style": {
+        "fontSize": 12,
+        "fontFamily": "Arial",
+        "color": "#9ca3af",
+        "textAlign": "left",
+        "lineHeight": 1.6
+      },
+      "content": "Address: 123 Business Street, City, State 12345\nSpecialties: Your expertise here",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-9",
+      "type": "qr",
+      "position": { "x": 680, "y": 380 },
+      "size": { "width": 80, "height": 80 },
+      "style": {},
+      "content": "",
+      "metadata": { "value": "https://yourcard.com" },
+      "zIndex": 1
+    }
+  ],
+  "createdAt": "2024-01-01T00:00:00Z",
+  "views": 0,
+  "shares": 0,
+  "downloads": 0
+}

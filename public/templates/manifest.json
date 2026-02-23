@@ -1,0 +1,54 @@
+{
+  "templates": [
+    {
+      "id": "template-modern-minimal",
+      "name": "Modern Minimal",
+      "description": "Clean and minimalist design with a focus on typography and whitespace",
+      "file": "modern-minimal.json",
+      "thumbnail": "modern-minimal.png",
+      "category": "minimal",
+      "features": ["responsive", "professional", "clean"],
+      "colors": ["#ffffff", "#000000", "#3b82f6", "#6b7280"]
+    },
+    {
+      "id": "template-professional-dark",
+      "name": "Professional Dark",
+      "description": "Sophisticated dark theme with accent colors for executives and professionals",
+      "file": "professional-dark.json",
+      "thumbnail": "professional-dark.png",
+      "category": "professional",
+      "features": ["elegant", "dark-mode", "executive"],
+      "colors": ["#1f2937", "#111827", "#10b981", "#9ca3af"]
+    },
+    {
+      "id": "template-creative-colorful",
+      "name": "Creative Colorful",
+      "description": "Vibrant and creative design perfect for designers, artists, and creative professionals",
+      "file": "creative-colorful.json",
+      "thumbnail": "creative-colorful.png",
+      "category": "creative",
+      "features": ["colorful", "creative", "modern"],
+      "colors": ["#f0f9ff", "#0ea5e9", "#fbbf24", "#1e293b"]
+    },
+    {
+      "id": "template-tech-startup",
+      "name": "Tech Startup",
+      "description": "Modern tech-focused design with code-style formatting, perfect for developers",
+      "file": "tech-startup.json",
+      "thumbnail": "tech-startup.png",
+      "category": "technology",
+      "features": ["tech", "developer", "modern"],
+      "colors": ["#0f172a", "#06b6d4", "#94a3b8", "#1e293b"]
+    },
+    {
+      "id": "template-corporate-executive",
+      "name": "Corporate Executive",
+      "description": "Formal corporate design ideal for executives, directors, and business leaders",
+      "file": "corporate-executive.json",
+      "thumbnail": "corporate-executive.png",
+      "category": "corporate",
+      "features": ["corporate", "formal", "professional"],
+      "colors": ["#f8fafc", "#1e40af", "#1e293b", "#64748b"]
+    }
+  ]
+}

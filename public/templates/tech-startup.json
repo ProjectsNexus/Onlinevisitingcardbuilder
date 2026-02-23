@@ -1,0 +1,157 @@
+{
+  "id": "template-tech-startup",
+  "layout": {
+    "width": 800,
+    "height": 500,
+    "backgroundColor": "#0f172a",
+    "backgroundImage": null
+  },
+  "blocks": [
+    {
+      "id": "block-1",
+      "type": "heading",
+      "position": { "x": 40, "y": 30 },
+      "size": { "width": 720, "height": 70 },
+      "style": {
+        "fontSize": 64,
+        "fontWeight": "bold",
+        "fontFamily": "Arial",
+        "color": "#06b6d4",
+        "textAlign": "left",
+        "lineHeight": 1
+      },
+      "content": "YOURNAME",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-2",
+      "type": "text",
+      "position": { "x": 40, "y": 110 },
+      "size": { "width": 720, "height": 30 },
+      "style": {
+        "fontSize": 16,
+        "fontFamily": "Arial",
+        "color": "#94a3b8",
+        "textAlign": "left",
+        "letterSpacing": 2
+      },
+      "content": "FULL-STACK DEVELOPER | TECH INNOVATOR",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-3",
+      "type": "shape",
+      "position": { "x": 40, "y": 155 },
+      "size": { "width": 100, "height": 2 },
+      "style": {
+        "backgroundColor": "#06b6d4",
+        "borderRadius": 0
+      },
+      "content": "",
+      "metadata": { "shapeType": "line" },
+      "zIndex": 1
+    },
+    {
+      "id": "block-4",
+      "type": "text",
+      "position": { "x": 40, "y": 185 },
+      "size": { "width": 680, "height": 25 },
+      "style": {
+        "fontSize": 13,
+        "fontFamily": "Arial",
+        "color": "#cbd5e1",
+        "textAlign": "left"
+      },
+      "content": "{ email: 'developer@example.com' | phone: '+1 (555) 123-4567' }",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-5",
+      "type": "text",
+      "position": { "x": 40, "y": 220 },
+      "size": { "width": 680, "height": 25 },
+      "style": {
+        "fontSize": 13,
+        "fontFamily": "Arial",
+        "color": "#cbd5e1",
+        "textAlign": "left"
+      },
+      "content": "→ github.com/yourprofile | linkedin.com/in/yourprofile | www.yourportfolio.com",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-6",
+      "type": "text",
+      "position": { "x": 40, "y": 280 },
+      "size": { "width": 420, "height": 60 },
+      "style": {
+        "fontSize": 12,
+        "fontFamily": "Arial",
+        "color": "#94a3b8",
+        "textAlign": "left",
+        "lineHeight": 1.6
+      },
+      "content": "Stack:\nReact • Node.js • TypeScript • PostgreSQL • AWS • Docker • GraphQL",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-7",
+      "type": "text",
+      "position": { "x": 480, "y": 280 },
+      "size": { "width": 240, "height": 60 },
+      "style": {
+        "fontSize": 12,
+        "fontFamily": "Arial",
+        "color": "#94a3b8",
+        "textAlign": "left",
+        "lineHeight": 1.6
+      },
+      "content": "Based in:\nSan Francisco, CA\n\nAvailable for:\nRemote Work",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-8",
+      "type": "text",
+      "position": { "x": 40, "y": 370 },
+      "size": { "width": 680, "height": 100 },
+      "style": {
+        "fontSize": 11,
+        "fontFamily": "Arial",
+        "color": "#64748b",
+        "textAlign": "left",
+        "lineHeight": 1.5
+      },
+      "content": "Passionate about building scalable, user-centric products. 5+ years of experience in full-stack web development. Specializing in modern web technologies and cloud infrastructure. Always exploring new innovations in technology.",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-9",
+      "type": "qr",
+      "position": { "x": 700, "y": 370 },
+      "size": { "width": 80, "height": 80 },
+      "style": {
+        "backgroundColor": "#1e293b",
+        "borderRadius": 8,
+        "border": {
+          "width": 2,
+          "color": "#06b6d4",
+          "style": "solid"
+        }
+      },
+      "content": "",
+      "metadata": { "value": "https://yourcard.com" },
+      "zIndex": 1
+    }
+  ],
+  "createdAt": "2024-01-01T00:00:00Z",
+  "views": 0,
+  "shares": 0,
+  "downloads": 0
+}

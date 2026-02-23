@@ -1,0 +1,168 @@
+{
+  "id": "template-professional-dark",
+  "layout": {
+    "width": 800,
+    "height": 500,
+    "backgroundColor": "#1f2937",
+    "backgroundImage": null
+  },
+  "blocks": [
+    {
+      "id": "block-1",
+      "type": "shape",
+      "position": { "x": 0, "y": 0 },
+      "size": { "width": 250, "height": 500 },
+      "style": {
+        "backgroundColor": "#111827",
+        "borderRadius": 0
+      },
+      "content": "",
+      "metadata": { "shapeType": "rectangle" },
+      "zIndex": 1
+    },
+    {
+      "id": "block-2",
+      "type": "heading",
+      "position": { "x": 40, "y": 40 },
+      "size": { "width": 170, "height": 80 },
+      "style": {
+        "fontSize": 40,
+        "fontWeight": "bold",
+        "fontFamily": "Arial",
+        "color": "#ffffff",
+        "textAlign": "left",
+        "lineHeight": 1.1
+      },
+      "content": "Your Name",
+      "metadata": {},
+      "zIndex": 2
+    },
+    {
+      "id": "block-3",
+      "type": "text",
+      "position": { "x": 40, "y": 130 },
+      "size": { "width": 170, "height": 60 },
+      "style": {
+        "fontSize": 12,
+        "fontFamily": "Arial",
+        "color": "#10b981",
+        "textAlign": "left",
+        "lineHeight": 1.5
+      },
+      "content": "Your Title / Position",
+      "metadata": {},
+      "zIndex": 2
+    },
+    {
+      "id": "block-4",
+      "type": "text",
+      "position": { "x": 40, "y": 240 },
+      "size": { "width": 170, "height": 25 },
+      "style": {
+        "fontSize": 11,
+        "fontFamily": "Arial",
+        "color": "#9ca3af",
+        "textAlign": "left",
+        "lineHeight": 1.4
+      },
+      "content": "📧 email@example.com",
+      "metadata": {},
+      "zIndex": 2
+    },
+    {
+      "id": "block-5",
+      "type": "text",
+      "position": { "x": 40, "y": 270 },
+      "size": { "width": 170, "height": 25 },
+      "style": {
+        "fontSize": 11,
+        "fontFamily": "Arial",
+        "color": "#9ca3af",
+        "textAlign": "left"
+      },
+      "content": "📱 +1 (555) 123-4567",
+      "metadata": {},
+      "zIndex": 2
+    },
+    {
+      "id": "block-6",
+      "type": "text",
+      "position": { "x": 40, "y": 300 },
+      "size": { "width": 170, "height": 25 },
+      "style": {
+        "fontSize": 11,
+        "fontFamily": "Arial",
+        "color": "#9ca3af",
+        "textAlign": "left"
+      },
+      "content": "🔗 www.yourwebsite.com",
+      "metadata": {},
+      "zIndex": 2
+    },
+    {
+      "id": "block-7",
+      "type": "heading",
+      "position": { "x": 290, "y": 40 },
+      "size": { "width": 480, "height": 100 },
+      "style": {
+        "fontSize": 56,
+        "fontWeight": "bold",
+        "fontFamily": "Arial",
+        "color": "#ffffff",
+        "textAlign": "right",
+        "lineHeight": 1.1
+      },
+      "content": "Your Professional Title",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-8",
+      "type": "text",
+      "position": { "x": 290, "y": 150 },
+      "size": { "width": 480, "height": 40 },
+      "style": {
+        "fontSize": 18,
+        "fontFamily": "Arial",
+        "color": "#10b981",
+        "textAlign": "right"
+      },
+      "content": "Company Name",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-9",
+      "type": "text",
+      "position": { "x": 290, "y": 230 },
+      "size": { "width": 480, "height": 120 },
+      "style": {
+        "fontSize": 13,
+        "fontFamily": "Arial",
+        "color": "#d1d5db",
+        "textAlign": "right",
+        "lineHeight": 1.6
+      },
+      "content": "Passionate professional dedicated to excellence. Specialized in delivering results and building strong relationships with clients and colleagues.",
+      "metadata": {},
+      "zIndex": 1
+    },
+    {
+      "id": "block-10",
+      "type": "qr",
+      "position": { "x": 650, "y": 380 },
+      "size": { "width": 120, "height": 120 },
+      "style": {
+        "backgroundColor": "#ffffff",
+        "borderRadius": 8
+      },
+      "content": "",
+      "metadata": { "value": "https://yourcard.com" },
+      "zIndex": 1
+    }
+  ],
+  "createdAt": "2024-01-01T00:00:00Z",
+  "views": 0,
+  "shares": 0,
+  "downloads": 0
+}
